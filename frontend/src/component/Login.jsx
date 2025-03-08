@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../component/Auth.css"; // Common CSS for Login and Signup
 
 const Login = () => {
   return (

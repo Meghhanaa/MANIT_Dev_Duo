@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Plus, Edit, Trash, Menu, ThumbsUp, MessageCircle, Bell } from "lucide-react";
+import { Plus, Edit, Trash, Menu, ThumbsUp, MessageCircle, Bell, X } from "lucide-react";
 import "../component/Home.css"; // Import CSS file
+import PostSection from "./PostSection.JSX";
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,6 +12,13 @@ const Home = () => {
       <nav className="navbar">
         <h1 className="logo">MANIT</h1>
 
+        {/* Navigation Links */}
+        <ul className="nav-links">
+          <li><a href="#">Create</a></li>
+          <li><a href="#">Update</a></li>
+          <li><a href="#">Delete</a></li>
+        </ul>
+
         {/* Auth Buttons (Login/Signup) */}
         <div className="auth-buttons">
           <button className="btn login-btn">Login</button>
@@ -19,12 +27,21 @@ const Home = () => {
 
         {/* Hamburger Icon */}
         <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-          <Menu size={28} />
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </div>
       </nav>
 
-      {/* Dropdown Menu */}
+      {/* Mobile Dropdown Menu */}
       <div className={`dropdown-menu ${menuOpen ? "visible" : ""}`}>
+        <a href="#">Create</a>
+        <a href="#">Update</a>
+        <a href="#">Delete</a>
+        <button className="btn login-btn">Login</button>
+        <button className="btn signup-btn">Sign Up</button>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="actions">
         <button className="btn create-btn"><Plus size={18} /> Create</button>
         <button className="btn update-btn"><Edit size={18} /> Update</button>
         <button className="btn delete-btn"><Trash size={18} /> Delete</button>
@@ -39,23 +56,7 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Posts Section */}
-      <div className="posts">
-        {[1, 2, 3, 4].map((post, index) => (
-          <div key={index} className="post">
-            <div className="post-header">
-              <img src={`https://i.pravatar.cc/50?img=${index + 5}`} alt="User" className="profile-pic" />
-              <h3 className="username">User {index + 1}</h3>
-            </div>
-            <img className="post-image" src={`https://source.unsplash.com/random/600x400?sig=${index}`} alt="Post" />
-            <div className="post-footer">
-              <button className="icon-btn"><ThumbsUp size={20} /> Like</button>
-              <button className="icon-btn"><MessageCircle size={20} /> Comment</button>
-              <button className="icon-btn"><Bell size={20} /> Subscribe</button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <PostSection></PostSection>
     </div>
   );
 };
